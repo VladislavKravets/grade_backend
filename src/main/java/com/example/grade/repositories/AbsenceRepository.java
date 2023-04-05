@@ -15,4 +15,8 @@ public interface AbsenceRepository extends JpaRepository<Absence, Integer> {
 
                                                   @Param("startDate") OffsetDateTime startDate,
                                                   @Param("endDate") OffsetDateTime endDate);
+
+    @Query("select a from Absence a where a.studentDegree.student.email = ?1 and a.data between ?2 and ?3")
+    List<Absence> findByStudentEmailAndDataBetween(String email, OffsetDateTime dataStart, OffsetDateTime dataEnd);
+
 }

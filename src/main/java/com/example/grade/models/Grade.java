@@ -21,12 +21,6 @@ public class Grade {
     @Column(name = "grade")
     private Integer grade;
 
-    @Column(name = "on_time")
-    private Boolean onTime;
-
-    @Column(name = "points")
-    private Integer points;
-
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
