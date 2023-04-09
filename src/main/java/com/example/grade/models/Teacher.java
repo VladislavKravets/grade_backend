@@ -29,19 +29,22 @@ public class Teacher {
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "position_id", nullable = false)
     private Position position;
 
     @Column(name = "academic_title", length = 25)
     private String academicTitle;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scientific_degree_id")
     private ScientificDegree scientificDegree;
+
+    @Column(name = "email", length = Integer.MAX_VALUE)
+    private String email;
 
 }

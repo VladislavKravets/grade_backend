@@ -1,9 +1,6 @@
 package com.example.grade.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @Table(name = "student_group")
 public class StudentGroup {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -42,8 +40,9 @@ public class StudentGroup {
     @Column(name = "tuition_term", nullable = false, length = 10)
     private String tuitionTerm;
 
-    @Column(name = "specialization_id", nullable = false)
-    private Integer specializationId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "specialization_id", nullable = false)
+    private Specialization specialization;
 
     @Column(name = "real_begin_year", nullable = false)
     private Integer realBeginYear;
