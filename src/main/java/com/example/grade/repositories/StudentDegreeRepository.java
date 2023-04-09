@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface StudentDegreeRepository extends JpaRepository<StudentDegree, Integer> {
-    @Query("select s.student from StudentDegree s where s.studentGroup.name = ?1 and s.active = true")
-    List<Student> findStudentByStudentGroupName(String name);
+    @Query("select s.student from StudentDegree s where s.studentGroup.id = ?1 and s.active = true")
+    List<Student> findStudentByStudentGroupName(Integer id);
 
 }

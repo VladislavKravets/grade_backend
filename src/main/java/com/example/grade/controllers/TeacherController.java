@@ -46,14 +46,14 @@ public class TeacherController {
     }    //http://localhost:8080/api/teacher/getGroupByTeacherEmail?email=t914@g
 
     @GetMapping("/getStudentByStudentGroupName")
-    public ResponseEntity getStudentByStudentGroupName(@RequestParam("name") String name)  {
-        List<Student> students = studentDegreeRepository.findStudentByStudentGroupName(name);
+    public ResponseEntity getStudentByStudentGroupName(@RequestParam("id") Integer id)  {
+        List<Student> students = studentDegreeRepository.findStudentByStudentGroupName(id);
         ModelMapper modelMapper = new ModelMapper();
         List<StudentDto> studentDto = students.stream()
                 .map(student -> modelMapper.map(student, StudentDto.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(studentDto);
-        }    //http://localhost:8080/api/teacher/getStudentByStudentGroupName?name=ТТ-74
+        }    //http://localhost:8080/api/teacher/getStudentByStudentGroupName?id=1067
 
     @GetMapping("/getGroupInfo")
     public ResponseEntity getGroupInfo(@RequestParam("id") Integer id) {
