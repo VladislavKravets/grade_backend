@@ -1,6 +1,6 @@
 /api/student/getGradeByStudentId  -- приймає email і діапазон дати і повертай всі оцінки студента. Приклад запиту:
 http://localhost:8080/api/student/getGradeByStudentId?email=s30001@g&startDate=2022-01-01&endDate=2023-01-01
-Повертає:
+Повертає:<b>
 [{"grade":96,"courseCourseNameName":"Колоїдна хімія","createdAt":"2022-06-11T15:00:43.19027+03:00"},{"grade":10,"courseCourseNameName":"Іноземна мова (за професійним спрямуванням)","createdAt":"2022-02-23T01:59:27.324908+02:00"}]
 
 /api/student/getAbsenceByStudentId  -- приймає email і діапазон дати і повертай всі пропуски студента. Приклад запиту:
