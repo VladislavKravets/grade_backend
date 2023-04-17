@@ -2,10 +2,15 @@ package com.example.grade.controllers;
 
 import com.example.grade.dto.AbsenceDto;
 import com.example.grade.dto.GradeDto;
+import com.example.grade.dto.StudentInfoDto;
 import com.example.grade.models.Absence;
 import com.example.grade.models.Grade;
+import com.example.grade.models.StudentDegree;
 import com.example.grade.repositories.AbsenceRepository;
+import com.example.grade.repositories.CoursesForGroupRepository;
 import com.example.grade.repositories.GradeRepository;
+import com.example.grade.repositories.StudentDegreeRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,9 +31,11 @@ import java.util.stream.Collectors;
 public class StudentController {
     private final GradeRepository gradeRepository;
     private final AbsenceRepository absenceRepository;
-
-    @GetMapping("/getGradeByStudentId")
-    public ResponseEntity getGradeByStudentId(@RequestParam("email") String email,
+    private final StudentDegreeRepository studentDegreeRepository;
+    private final CoursesForGroupRepository coursesForGroupRepository;
+    @Operation(summary = "Приймає email і діапазон дати і повертає всі оцінки студента.")
+    @GetMapping("/getGradesByStudentEmail")
+    public ResponseEntity getGradesByStudentEmail(@RequestParam("email") String email,
                                               @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         List<Grade> grades = gradeRepository.findByStudentEmailAndCreatedAtBetween(email, startDate.atStartOfDay().atOffset(ZoneOffset.UTC), endDate.atStartOfDay().atOffset(ZoneOffset.UTC));
@@ -39,12 +46,11 @@ public class StudentController {
         return ResponseEntity.ok(gradeDto);
     }    //http://localhost:8080/api/student/getGradeByStudentId?email=u3@g&startDate=2022-01-01&endDate=2023-01-01
 
-
-    @GetMapping("/getAbsenceByStudentId")
-    public ResponseEntity getAbsenceByStudentId(@RequestParam("email") String email,
+    @Operation(summary = "Приймає email і діапазон дати і повертає всі пропуски студента.")
+    @GetMapping("/getAbsencesByStudentEmail")
+    public ResponseEntity getAbsencesByStudentEmail(@RequestParam("email") String email,
                                                 @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                 @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate)  {
-//        List<Absence> absences = absenceRepository.findAllByStudentDegreeIdAndData(id, startDate.atStartOfDay().atOffset(ZoneOffset.UTC), endDate.atStartOfDay().atOffset(ZoneOffset.UTC));
         List<Absence> absences = absenceRepository.findByStudentEmailAndDataBetween(email, startDate.atStartOfDay().atOffset(ZoneOffset.UTC), endDate.atStartOfDay().atOffset(ZoneOffset.UTC));
         ModelMapper modelMapper = new ModelMapper();
         List<AbsenceDto> absenceDto = absences.stream()
@@ -53,5 +59,20 @@ public class StudentController {
         return ResponseEntity.ok(absenceDto);
     }    //http://localhost:8080/api/student/getAbsenceByStudentId?email=u3@g&startDate=2022-01-01&endDate=2023-01-01
 
+    @Operation(summary = "Приймає email студента і повертає інформацію про нього.")
+    @GetMapping("/getStudentInfoByEmail")
+    public ResponseEntity getStudentInfoByEmail(@RequestParam("email") String email) {
+        StudentDegree student = studentDegreeRepository.findAllByStudentEmail(email);
+        ModelMapper modelMapper = new ModelMapper();
+        return ResponseEntity.ok(modelMapper.map(student, StudentInfoDto.class));
+    }    //http://localhost:8080/api/student/getStudentInfoByEmail?email=s1@g
 
+    @Operation(summary = "Приймає email групи і семестре і повертає список предметів.")
+    @GetMapping("/getByStudentEmailAndCourseSemester")
+    public ResponseEntity getByStudentEmailAndCourseSemester(@RequestParam("email") String email,
+                                                             @RequestParam("semester") Integer semester) {
+        List<String> courses = coursesForGroupRepository.findByStudentEmailAndCourseSemester(email, semester);
+        ModelMapper modelMapper = new ModelMapper();
+        return ResponseEntity.ok(courses);
+    }
 }

@@ -45,9 +45,9 @@ public class TeacherController {
         return ResponseEntity.ok(groupsDto);
     }    //http://localhost:8080/api/teacher/getGroupByTeacherEmail?email=t914@g
 
-    @GetMapping("/getStudentByStudentGroupName")
-    public ResponseEntity getStudentByStudentGroupName(@RequestParam("id") Integer id)  {
-        List<Student> students = studentDegreeRepository.findStudentByStudentGroupName(id);
+    @GetMapping("/getStudentsByStudentGroupId")
+    public ResponseEntity getStudentsByStudentGroupId(@RequestParam("id") Integer id)  {
+        List<Student> students = studentDegreeRepository.findStudentByStudentGroupId(id);
         ModelMapper modelMapper = new ModelMapper();
         List<StudentDto> studentDto = students.stream()
                 .map(student -> modelMapper.map(student, StudentDto.class))
