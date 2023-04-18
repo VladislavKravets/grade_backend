@@ -33,6 +33,7 @@ public class StudentController {
     private final AbsenceRepository absenceRepository;
     private final StudentDegreeRepository studentDegreeRepository;
     private final CoursesForGroupRepository coursesForGroupRepository;
+
     @Operation(summary = "Приймає email і діапазон дати і повертає всі оцінки студента.")
     @GetMapping("/getGradesByStudentEmail")
     public ResponseEntity getGradesByStudentEmail(@RequestParam("email") String email,
@@ -44,7 +45,7 @@ public class StudentController {
                 .map(grade -> modelMapper.map(grade, GradeDto.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(gradeDto);
-    }    //http://localhost:8080/api/student/getGradeByStudentId?email=u3@g&startDate=2022-01-01&endDate=2023-01-01
+    }    //http://localhost:8080/api/student/getGradesByStudentEmail?email=s30001@g&startDate=2022-01-01&endDate=2023-01-01
 
     @Operation(summary = "Приймає email і діапазон дати і повертає всі пропуски студента.")
     @GetMapping("/getAbsencesByStudentEmail")
@@ -57,7 +58,7 @@ public class StudentController {
                 .map(absence -> modelMapper.map(absence, AbsenceDto.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(absenceDto);
-    }    //http://localhost:8080/api/student/getAbsenceByStudentId?email=u3@g&startDate=2022-01-01&endDate=2023-01-01
+    }    //http://localhost:8080/api/student/getAbsencesByStudentEmail?email=s30001@g&startDate=2022-01-01&endDate=2023-01-01
 
     @Operation(summary = "Приймає email студента і повертає інформацію про нього.")
     @GetMapping("/getStudentInfoByEmail")
@@ -65,14 +66,14 @@ public class StudentController {
         StudentDegree student = studentDegreeRepository.findAllByStudentEmail(email);
         ModelMapper modelMapper = new ModelMapper();
         return ResponseEntity.ok(modelMapper.map(student, StudentInfoDto.class));
-    }    //http://localhost:8080/api/student/getStudentInfoByEmail?email=s1@g
+    }    //http://localhost:8080/api/student/getStudentInfoByEmail?email=s30006@g
 
-    @Operation(summary = "Приймає email групи і семестре і повертає список предметів.")
+    @Operation(summary = "Приймає email студента і семестре і повертає список предметів.")
     @GetMapping("/getByStudentEmailAndCourseSemester")
     public ResponseEntity getByStudentEmailAndCourseSemester(@RequestParam("email") String email,
                                                              @RequestParam("semester") Integer semester) {
         List<String> courses = coursesForGroupRepository.findByStudentEmailAndCourseSemester(email, semester);
         ModelMapper modelMapper = new ModelMapper();
         return ResponseEntity.ok(courses);
-    }
+    }//http://localhost:8080/api/student/getByStudentEmailAndCourseSemester?email=s30006@g&semester=5
 }
