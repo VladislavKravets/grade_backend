@@ -1,6 +1,7 @@
 package com.example.grade.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,20 +11,25 @@ import lombok.Setter;
 @Table(name = "student_degree")
 public class StudentDegree {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotNull
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 
-    @Column(name = "specialization_id", nullable = false)
-    private Integer specializationId;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "specialization_id", nullable = false)
+    private Specialization specialization;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_group_id")
     private StudentGroup studentGroup;
 
