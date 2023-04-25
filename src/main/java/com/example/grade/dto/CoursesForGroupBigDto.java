@@ -1,4 +1,4 @@
-package com.example.grade.models;
+package com.example.grade.dto;
 
 import lombok.Data;
 

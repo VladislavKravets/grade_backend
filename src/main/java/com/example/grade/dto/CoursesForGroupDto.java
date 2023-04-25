@@ -1,14 +1,12 @@
 package com.example.grade.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.grade.models.CoursesForGroup;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class CoursesForGroupDto implements Serializable {
-    private String studentGroupName;
+    private String courseCourseNameId;
+    private String courseCourseNameName;
 }

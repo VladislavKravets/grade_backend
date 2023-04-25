@@ -1,12 +1,7 @@
 package com.example.grade.controllers;
 
-import com.example.grade.dto.StudentDto;
-import com.example.grade.dto.StudentGroupDto;
-import com.example.grade.dto.StudentGroupSmallDto;
-import com.example.grade.dto.TeacherDto;
-import com.example.grade.models.Student;
-import com.example.grade.models.StudentGroup;
-import com.example.grade.models.Teacher;
+import com.example.grade.dto.*;
+import com.example.grade.models.*;
 import com.example.grade.repositories.StudentDegreeRepository;
 import com.example.grade.repositories.StudentGroupRepository;
 import com.example.grade.repositories.TeacherRepository;
@@ -74,5 +69,31 @@ public class TeacherController {
         String table = teacherRepository.findTeacherOrStudentByEmail(email);
         return table;
     }    //http://localhost:8080/api/teacher/getTeacherOrStudentByEmail?email=t914@g
+
+    @Operation(summary = "Приймає email викладача і семестр -- повертає список предметів викладача.")
+    @GetMapping("/getCourseByTeacherEmail")
+    public ResponseEntity getCourseByTeacherEmail(@RequestParam("email") String email,
+                                                  @RequestParam("semester") Integer semester)  {
+        List<CoursesForGroup> groups = studentGroupRepository.findCourseByTeacherEmail(email, semester);
+        ModelMapper modelMapper = new ModelMapper();
+        List<CoursesForGroupDto> groupsDto = groups.stream()
+                .map(group -> modelMapper.map(group, CoursesForGroupDto.class))
+                .distinct()
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(groupsDto);
+    }    //http://localhost:8080/api/teacher/getCourseByTeacherEmail?email=t914@g&semester=3
+
+    @Operation(summary = "Приймає email викладача, семестр, id предмета і повертає список груп.")
+    @GetMapping("/getGroupByEmailSemesterAndIdNameCourse")
+    public ResponseEntity getGroupByEmailSemesterAndIdNameCourse(@RequestParam("email") String email,
+                                                                 @RequestParam("semester") Integer semester,
+                                                                 @RequestParam("id") Integer id)  {
+        List<CoursesForGroup> groups = studentGroupRepository.findGroupByEmailSemesterAndIdNameCourse(email, semester, id);
+        ModelMapper modelMapper = new ModelMapper();
+        List<StudentGroupSmallDto> groupsDto = groups.stream()
+                .map(group -> modelMapper.map(group, StudentGroupSmallDto.class))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(groupsDto);
+    }    //http://localhost:8080/api/teacher/getGroupByEmailSemesterAndIdNameCourse?email=t914@g&semester=3&id=2075
 
 }

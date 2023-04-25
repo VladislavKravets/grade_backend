@@ -10,6 +10,6 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class StudentGroupSmallDto implements Serializable {
-    private Integer id;
-    private String name;
+    private String studentGroupId;
+    private String studentGroupName;
 }
