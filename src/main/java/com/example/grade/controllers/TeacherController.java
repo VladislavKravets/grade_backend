@@ -83,15 +83,17 @@ public class TeacherController {
         return ResponseEntity.ok(groupsDto);
     }    //http://localhost:8080/api/teacher/getCourseByTeacherEmail?email=t914@g&semester=3
 
-    @Operation(summary = "Приймає email викладача, семестр, id предмета і повертає список його груп.")
+    @Operation(summary = "Приймає email викладача, семестр, id предмета і повертає список груп.")
     @GetMapping("/getGroupByEmailSemesterAndIdNameCourse")
-    public ResponseEntity getGroupByEmailSemesterAndIdNameCourse(@RequestParam("email") String email)  {
-        List<StudentGroup> groups = studentGroupRepository.findGroupByTeacherEmail(email);
+    public ResponseEntity getGroupByEmailSemesterAndIdNameCourse(@RequestParam("email") String email,
+                                                                 @RequestParam("semester") Integer semester,
+                                                                 @RequestParam("id") Integer id)  {
+        List<CoursesForGroup> groups = studentGroupRepository.findGroupByEmailSemesterAndIdNameCourse(email, semester, id);
         ModelMapper modelMapper = new ModelMapper();
         List<StudentGroupSmallDto> groupsDto = groups.stream()
                 .map(group -> modelMapper.map(group, StudentGroupSmallDto.class))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(groupsDto);
-    }    //http://localhost:8080/api/teacher/getGroupByTeacherEmail?email=t914@g
+    }    //http://localhost:8080/api/teacher/getGroupByEmailSemesterAndIdNameCourse?email=t914@g&semester=3&id=2075
 
 }

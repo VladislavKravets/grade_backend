@@ -15,4 +15,7 @@ public interface StudentGroupRepository extends JpaRepository<StudentGroup, Inte
     @Query("select c from CoursesForGroup c where c.teacher.email = ?1 and c.course.semester = ?2 and c.studentGroup.active = true")
     List<CoursesForGroup> findCourseByTeacherEmail(String email, Integer semester);
 
+    @Query("select c from CoursesForGroup c where c.teacher.email = ?1 and c.course.semester = ?2 and c.course.courseName.id = ?3 and c.studentGroup.active = true")
+    List<CoursesForGroup> findGroupByEmailSemesterAndIdNameCourse(String email, Integer semester, Integer id);
+
 }
