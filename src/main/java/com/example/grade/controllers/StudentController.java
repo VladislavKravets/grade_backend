@@ -68,9 +68,9 @@ public class StudentController {
         return ResponseEntity.ok(modelMapper.map(student, StudentInfoDto.class));
     }    //http://localhost:8080/api/student/getStudentInfoByEmail?email=s30006@g
 
-    @Operation(summary = "Приймає email студента і семестре і повертає список предметів.")
-    @GetMapping("/getByStudentEmailAndCourseSemester")
-    public ResponseEntity getByStudentEmailAndCourseSemester(@RequestParam("email") String email,
+    @Operation(summary = "Приймає email студента і семестре -- повертає список предметів.")
+    @GetMapping("/getCoursesByEmailAndSemester")
+    public ResponseEntity getCoursesByEmailAndSemester(@RequestParam("email") String email,
                                                              @RequestParam("semester") Integer semester) {
         List<String> courses = coursesForGroupRepository.findByStudentEmailAndCourseSemester(email, semester);
         ModelMapper modelMapper = new ModelMapper();
