@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @Table(name = "course")
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -28,12 +27,8 @@ public class Course {
     @Column(name = "semester", nullable = false)
     private Integer semester;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_name_id")
     private CourseName courseName;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "kc_id")
-    private KnowledgeControl kc;
 
 }

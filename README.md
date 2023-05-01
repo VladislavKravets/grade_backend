@@ -36,7 +36,7 @@ http://localhost:8080/api/teacher/getGroupInfo?id=1067
 {"name":"Т-71","active":true,"beginYears":1,"creationYear":2017,"studySemesters":8,"studyYears":3.84,"specializationName":"Туризм","specializationDegreeName":"Бакалавр","specializationDepartmentName":"туризму та готельно-ресторанної справи","specializationFacultyName":"факультет харчових технологій та сфери обслуговування","specializationSpecialityName":"Туризм","specializationProgramHeadName":"Світлана","specializationProgramHeadPatronimic":"Станіславівна","specializationProgramHeadSurname":"Бєляєва"}
 
 /api/student/getByStudentEmailAndCourseSemester -- Приймає email студента і семестре і повертає список предметів. Приклад запиту:
-http://localhost:8080/api/student/getByStudentEmailAndCourseSemester?email=s30006@g&semester=5
+http://localhost:8080/api/student/getCoursesByEmailAndSemester?email=s30006@g&semester=5
 <br>Повертає:
 ["Історія науки і техніки","Взаємозамінність з КП","Технічна механіка мікросистем","Електроніка та мікросхемотехніка","Біофізика та біомеханіка","Біометрія"]
 

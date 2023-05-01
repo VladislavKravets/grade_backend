@@ -19,9 +19,6 @@ public class ScientificDegree {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "name_eng", nullable = false, length = 50)
-    private String nameEng;
-
     @Column(name = "abbr", nullable = false, length = 15)
     private String abbr;
 

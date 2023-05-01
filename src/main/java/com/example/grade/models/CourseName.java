@@ -20,7 +20,4 @@ public class CourseName {
     @Column(name = "name_eng", length = 150)
     private String nameEng;
 
-    @Column(name = "abbreviation", length = 15)
-    private String abbreviation;
-
 }

@@ -15,22 +15,16 @@ public class Grade {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "ects", length = 2)
-    private String ects;
-
     @Column(name = "grade")
     private Integer grade;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "student_degree_id", nullable = false)
     private StudentDegree studentDegree;
-
-    @Column(name = "academic_difference", nullable = false)
-    private Boolean academicDifference = false;
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
