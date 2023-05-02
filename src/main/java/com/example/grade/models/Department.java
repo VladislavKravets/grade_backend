@@ -1,7 +1,6 @@
 package com.example.grade.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,6 @@ public class Department {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @NotNull
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 

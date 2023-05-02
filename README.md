@@ -1,10 +1,5 @@
 OpenApi: http://localhost:8080/swagger-ui/index.html
 
-17.04.2023
-getStudentByStudentGroupName -> getStudentsByStudentGroupId
-getGradeByStudentId -> getGradesByStudentEmail
-getAbsenceByStudentId -> getAbsencesByStudentEmail
-
 /api/student/getGradesByStudentEmail  -- приймає email і діапазон дати і повертай всі оцінки студента. Приклад запиту:
 http://localhost:8080/api/student/getGradesByStudentEmail?email=s30001@g&startDate=2022-01-01&endDate=2023-01-01
 <br>Повертає:
@@ -49,4 +44,6 @@ http://localhost:8080/api/student/getStudentInfoByEmail?email=s30006@g
 http://localhost:8080/api/teacher/getTeacherOrStudentByEmail?email=t914@g
 <br>Повертає:
 teacher
+
+http://localhost:8080/api/teacher/getGroupByEmailSemesterAndIdNameCourse?email=t914@g&semester=3&id=2075
 
