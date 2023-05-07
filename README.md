@@ -1,10 +1,5 @@
 OpenApi: http://localhost:8080/swagger-ui/index.html
 
-17.04.2023
-getStudentByStudentGroupName -> getStudentsByStudentGroupId
-getGradeByStudentId -> getGradesByStudentEmail
-getAbsenceByStudentId -> getAbsencesByStudentEmail
-
 /api/student/getGradesByStudentEmail  -- приймає email і діапазон дати і повертай всі оцінки студента. Приклад запиту:
 http://localhost:8080/api/student/getGradesByStudentEmail?email=s30001@g&startDate=2022-01-01&endDate=2023-01-01
 <br>Повертає:
@@ -36,7 +31,7 @@ http://localhost:8080/api/teacher/getGroupInfo?id=1067
 {"name":"Т-71","active":true,"beginYears":1,"creationYear":2017,"studySemesters":8,"studyYears":3.84,"specializationName":"Туризм","specializationDegreeName":"Бакалавр","specializationDepartmentName":"туризму та готельно-ресторанної справи","specializationFacultyName":"факультет харчових технологій та сфери обслуговування","specializationSpecialityName":"Туризм","specializationProgramHeadName":"Світлана","specializationProgramHeadPatronimic":"Станіславівна","specializationProgramHeadSurname":"Бєляєва"}
 
 /api/student/getByStudentEmailAndCourseSemester -- Приймає email студента і семестре і повертає список предметів. Приклад запиту:
-http://localhost:8080/api/student/getByStudentEmailAndCourseSemester?email=s30006@g&semester=5
+http://localhost:8080/api/student/getCoursesByEmailAndSemester?email=s30006@g&semester=5
 <br>Повертає:
 ["Історія науки і техніки","Взаємозамінність з КП","Технічна механіка мікросистем","Електроніка та мікросхемотехніка","Біофізика та біомеханіка","Біометрія"]
 
@@ -49,4 +44,6 @@ http://localhost:8080/api/student/getStudentInfoByEmail?email=s30006@g
 http://localhost:8080/api/teacher/getTeacherOrStudentByEmail?email=t914@g
 <br>Повертає:
 teacher
+
+http://localhost:8080/api/teacher/getGroupByEmailSemesterAndIdNameCourse?email=t914@g&semester=3&id=2075
 

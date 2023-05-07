@@ -6,9 +6,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-/**
- * A DTO for the {@link com.example.grade.models.StudentDegree} entity
- */
 @Getter
 @Setter
 @NoArgsConstructor

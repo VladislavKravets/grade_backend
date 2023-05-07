@@ -22,14 +22,8 @@ public class Department {
     @Column(name = "abbr", nullable = false, length = 20)
     private String abbr;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
-
-    @Column(name = "web_site", nullable = false, length = 120)
-    private String webSite;
-
-    @Column(name = "name_eng", nullable = false, length = 100)
-    private String nameEng;
 
 }
