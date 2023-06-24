@@ -12,6 +12,7 @@ import java.time.OffsetDateTime;
 @Table(name = "grade")
 public class Grade {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -28,5 +29,4 @@ public class Grade {
 
     @Column(name = "created_at", nullable = false)
     private OffsetDateTime createdAt;
-
 }

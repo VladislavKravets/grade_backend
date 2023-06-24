@@ -1,5 +1,6 @@
 package com.example.grade.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class Course {
     @Column(name = "semester", nullable = false)
     private Integer semester;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_name_id")
     private CourseName courseName;

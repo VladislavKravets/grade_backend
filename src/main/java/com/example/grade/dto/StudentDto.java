@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class StudentDto implements Serializable {
+    private Long id;
     private String name;
     private String patronimic;
     private String surname;

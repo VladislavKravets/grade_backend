@@ -6,10 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentDegreeRepository extends JpaRepository<StudentDegree, Integer> {
     @Query("select s.student from StudentDegree s where s.studentGroup.id = ?1 and s.active = true")
     List<Student> findStudentByStudentGroupId(Integer id);
     StudentDegree findAllByStudentEmail(String email);
-
+    Optional<StudentDegree> findByStudentId(int studentId);
 }
